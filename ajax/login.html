@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Login</title>
+
+    <!-- CSS-ядро Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Підібрані стилі саме для цього шаблона -->
+    <link href="css/login.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+</head>
+
+<body>
+<div id="resp"></div>
+
+<div class="container">
+
+     <form class="form-signin" role="form" id="form-signin">
+        <!--<h2 class="form-signin-heading">Вхід</h2>-->
+        <label for="inputEmail" class="sr-only">Імейл</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Імейл" required autofocus>
+        <label for="inputPassword" class="sr-only">Пароль</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
+       <!-- <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Запам'ятати мене
+            </label>
+        </div>-->
+        <button class="btn btn-lg btn-primary btn-block" type="button" id="login-button">Увійти</button>
+        <button class="btn btn-lg btn-primary btn-block" type="button" id="new-user-button">Новий користувач</button>
+    </form>
+
+    <form class="form-signin" role="form" id="form-signup" style="display: none">
+        <!--<h2 class="form-signin-heading">Вхід</h2>-->
+        <label for="newUserMail" class="sr-only">Імейл</label>
+        <input type="email" id="newUserMail" class="form-control" placeholder="Імейл" required autofocus>
+        <label for="newUserPassword" class="sr-only">Пароль</label>
+        <input type="password" id="newUserPassword" class="form-control" placeholder="Пароль" required>
+        <label for="newUserPasswordEq" class="sr-only">Пароль ще разок</label>
+        <input type="password" id="newUserPasswordEq" class="form-control" placeholder="Пароль ще разок" required>
+        <!-- <div class="checkbox">
+             <label>
+                 <input type="checkbox" value="remember-me"> Запам'ятати мене
+             </label>
+         </div>-->
+        <button class="btn btn-lg btn-primary btn-block" type="button" id="registration-button">Зареєструвати</button>
+    </form>
+
+    <br><br>
+
+<!--    <div id="reply"></div>-->
+
+</div> <!-- /container -->
+
+<script type="text/javascript" src="js/login_jq.js"></script>
+</body>
+</html>
