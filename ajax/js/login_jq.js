@@ -8,6 +8,8 @@ $(document).ready(function () {
     $("#logout").bind("click", logOut);
     $("#change_password").bind("click", changePasswordFormShow);
     $("#change-password-button").bind("click", changePassword);
+    $("#cancel-button").bind("click", cancelRegistration);
+
 
     if (localStorage.getItem("token") != null) {
         mainNavBarShow();
@@ -146,6 +148,7 @@ function logOut() {
 
     localStorage.removeItem("token");
     mainNavBarHide();
+    changePasswordFormHide();
     loginFormShow();
 }
 
@@ -196,7 +199,11 @@ function changePassword() {
         //TODO:password alert
     }
 
+ }
 
+function cancelRegistration(){
+    hideForms();
+    loginFormShow();
 }
 //////////////////////////////UTILS/////////////////////////////////
 
