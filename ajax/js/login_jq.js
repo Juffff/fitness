@@ -5,8 +5,6 @@ $(document).ready(function () {
     $("#login-button").bind("click", signIn);
     $("#new-user-button").bind("click", newUserFormShow);
     $("#registration-button").bind("click", register);
-
-
 });
 
 //document objects
@@ -21,31 +19,24 @@ var objects = {
     newUserButton: $("#new-user-button"),
     newMail: $("#newUserMail"),
     newPassword: $("#newUserPassword"),
-    newPasswordEq: $("#newUserPasswordEq")
+    newPasswordEq: $("#newUserPasswordEq"),
+    mainNavBar: $("#main_navbar")
 };
 
-//new user function
-function newUserFormShow() {
-    //change form
-    objects.formSignIn.replaceWith(objects.formSignUp);
-    objects.formSignUp.show("fast");
-    //visibility correction =)
-    objects.newPasswordEq.css("margin-top", "-11px");
+objects.mail.val("juff@ukr.net");
+objects.pass.val("Lammer48");
 
-}
 
 function register() {
-    var a = objects.newPassword.val();
+    var pass1 = objects.newPassword.val();
+    var pass2 = objects.newPasswordEq.val();
 
-    var b = objects.newPasswordEq.val();
-
-    if (a != null && b != null && objects.newMail != null && a.localeCompare(b) == 0 && mailValidation(objects.newMail)) {
+    if (pass1 != null && pass2 != null && objects.newMail != null && pass1.localeCompare(pass2) == 0 && mailValidation(objects.newMail.val())) {
         //json object
         var newLogin_data = {
-            "email": objects.newMail.val,
-            "password": objects.newPassword.val
+            "email": objects.newMail.val(),
+            "password": objects.newPassword.val()
         };
-
 
         //ajax request
         $.ajax({
@@ -60,8 +51,14 @@ function register() {
 
         //on success
         function functionOnSuccess(data) {
-            /*$("#reply").text(data);*/
-            alert(data);
+            if (data.error == null) {
+                alert("Confirmation send to your mail!");
+                loginFormShow();
+            }
+            else {
+                parseObj(data)
+            }
+            //TODO:error handler, confirmation of seccess
         }
 
     } else {
@@ -69,23 +66,15 @@ function register() {
     }
 }
 
-function mailValidation(mail) {
-    //return true when valid, false when invalid
-    //TODO: make validator
-    return true;
-}
 
 //sing in function
 function signIn() {
 
-    // var serverLogin = "http://localhost:8080";
-
-    //json object
+    //json object request
     var login_data = {
-        "email": objects.mail.val,
-        "password": objects.pass.val
+        "email": objects.mail.val(),
+        "password": objects.pass.val()
     };
-
 
     //ajax request
     $.ajax({
@@ -97,12 +86,56 @@ function signIn() {
         success: functionOnSuccess
     });
 
-
     //on success
     function functionOnSuccess(data) {
-        /*$("#reply").text(data);*/
-        alert(data);
+        var response = data;
+        if (response.error == null) {
+            var token = response.token;
+            localStorage.setItem("token", token);
+        } else {
+            parseObj(response[error]);
+            //TODO: error handler
+        }
+
     }
 
+}
 
+
+//////////////////////////////UTILS/////////////////////////////////
+
+function loginFormShow() {
+    //change form
+    objects.formSignUp.hide();
+    objects.formSignIn.show("fast");
+
+}
+
+//new user function
+function newUserFormShow() {
+    //change form
+    objects.formSignIn.hide();
+    objects.formSignUp.show("fast");
+    //visibility correction =)
+    objects.newPasswordEq.css("margin-top", "-11px");
+}
+//Simple parsing
+
+function parseObj(object) {
+
+    for (var key in object) {
+
+        if (typeof object[key] == "object") {
+            console.log(key);
+            parseObj(object[key])
+        } else {
+            console.log((typeof object[key]) + " " + key + ": " + object[key]);
+        }
+    }
+}
+
+function mailValidation(mail) {
+    //return true when valid, false when invalid
+    //TODO: make validator
+    return true;
 }
