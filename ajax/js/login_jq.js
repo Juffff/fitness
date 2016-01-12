@@ -5,12 +5,14 @@ $(document).ready(function () {
     $("#login-button").bind("click", signIn);
     $("#new-user-button").bind("click", newUserFormShow);
     $("#registration-button").bind("click", register);
-    $("#logout").bind("click",logOut);
+    $("#logout").bind("click", logOut);
+    $("#change_password").bind("click", changePasswordFormShow);
+    $("#change-password-button").bind("click", changePassword);
 
-    if(localStorage.getItem("token")!=null){
+    if (localStorage.getItem("token") != null) {
         mainNavBarShow();
 
-    }else {
+    } else {
         loginFormShow();
     }
 });
@@ -19,8 +21,11 @@ $(document).ready(function () {
 var objects = {
     serverLogin: "http://ft.oweather.net/api/auth/login",
     serverSignUp: "http://ft.oweather.net/api/auth/signup",
+    serverLogOut: "http://ft.oweather.net/api/auth/logout",
+    serverChangepsw: "http://ft.oweather.net/api/auth/changepsw",
     formSignIn: $("#form-signin"),
     formSignUp: $("#form-signup"),
+    formChangePassword: $("#form-change-password"),
     mail: $("#inputEmail"),
     pass: $("#inputPassword"),
     loginButton: $("#login-button"),
@@ -28,7 +33,9 @@ var objects = {
     newMail: $("#newUserMail"),
     newPassword: $("#newUserPassword"),
     newPasswordEq: $("#newUserPasswordEq"),
-    mainNavBar: $("#main_navbar")
+    mainNavBar: $("#main_navbar"),
+    newUserPasswordChange: $("#newUserPassword_change"),
+    newUserPasswordEqChange: $("#newUserPasswordEq_change")
 };
 
 //TODO:remove this)
@@ -67,7 +74,7 @@ function register() {
             else {
                 parseObj(data)
             }
-            //TODO:error handler, confirmation of seccess
+            //TODO:error handler, confirmation of success
         }
 
     } else {
@@ -114,16 +121,89 @@ function signIn() {
 
 }
 
-function logOut(){
+function logOut() {
+
+    var tokenObject = {
+        token: localStorage.getItem("token")
+    }
+
+
+    $.ajax({
+        url: objects.serverLogOut,
+        headers: {
+            'X-Auth-Token': localStorage.getItem("token")
+        },
+        type: "GET",
+        data: JSON.stringify(tokenObject),
+        crossDomain: true,
+        contentType: "application/json",
+        success: functionOnSuccess
+    });
+
+    function functionOnSuccess(data) {
+        parseObj(data);
+    }
+
     localStorage.removeItem("token");
     mainNavBarHide();
     loginFormShow();
 }
+
+function changePassword() {
+
+    changePasswordFormShow();
+    objects.formChangePassword.css("padding-top","80px");
+
+    var pass1 = objects.newUserPasswordChange.val();
+    var pass2 = objects.newUserPasswordEqChange.val();
+
+    if (pass1 != null && pass2 != null && pass1.localeCompare(pass2) == 0) {
+
+        //json object
+        var changePasswordData = {
+            "newPassword": pass1
+        };
+
+        console.log(changePasswordData.newPassword);
+
+        //ajax request
+        $.ajax({
+            url: objects.serverChangepsw,
+            headers: {
+                'X-Auth-Token': localStorage.getItem("token")
+            },
+            type: "POST",
+            data: JSON.stringify(changePasswordData),
+            crossDomain: true,
+            contentType: "application/json",
+            success: functionOnSuccess
+        });
+
+
+        //on success
+        function functionOnSuccess(data) {
+            if (data.error == null) {
+                alert("Confirmation send to your mail!");
+                changePasswordFormHide();
+            }
+            else {
+                parseObj(data)
+            }
+            //TODO:error handler, confirmation of success
+        }
+
+    } else {
+        //TODO:password alert
+    }
+
+
+}
 //////////////////////////////UTILS/////////////////////////////////
 
-function hideForms(){
+function hideForms() {
     objects.formSignUp.hide();
     objects.formSignIn.hide();
+    objects.formChangePassword.hide();
 }
 
 function loginFormShow() {
@@ -142,12 +222,21 @@ function newUserFormShow() {
     objects.newPasswordEq.css("margin-top", "-11px");
 }
 
-function mainNavBarShow(){
-        objects.mainNavBar.show();
+function mainNavBarShow() {
+    objects.mainNavBar.show();
 }
 
-function mainNavBarHide(){
+function mainNavBarHide() {
     objects.mainNavBar.hide();
+}
+
+function changePasswordFormShow() {
+
+    objects.formChangePassword.show();
+}
+
+function changePasswordFormHide() {
+    objects.formChangePassword.hide();
 }
 
 //Simple parsing

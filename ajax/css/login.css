@@ -39,3 +39,11 @@ body {
   border-top-right-radius: 0;
 }
 
+#settings .nav{
+  display: none;
+
+}
+
+#settings:hover .nav{
+  display: block;
+}

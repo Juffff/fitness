@@ -35,7 +35,11 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#">Панель керування</a></li>
-                <li><a href="#">Налаштування</a></li>
+                <li id="settings"><a href="#">Налаштування</a>
+                    <ul class="nav nav-pills nav-stacked">
+                        <li id="change_password"><a href="#">Змінити пароль</a>
+                    </ul>
+                </li>
                 <li><a href="#">Профіль</a></li>
                 <li id="logout"><a href="#">Вихід</a></li>
             </ul>
@@ -77,6 +81,15 @@
              </label>
          </div>-->
         <button class="btn btn-lg btn-primary btn-block" type="button" id="registration-button">Зареєструвати</button>
+    </form>
+
+    <form class="form-signin" role="form" id="form-change-password" style="display: none">
+
+        <label for="newUserPassword_change" class="sr-only">Новий пароль</label>
+        <input type="password" id="newUserPassword_change" class="form-control" placeholder="Новий пароль" required>
+        <label for="newUserPasswordEq_change" class="sr-only">Пароль ще разок</label>
+        <input type="password" id="newUserPasswordEq_change" class="form-control" placeholder="Пароль ще разок" required>
+        <button class="btn btn-lg btn-primary btn-block" type="button" id="change-password-button">Змінити пароль</button>
     </form>
 
     <br><br>
