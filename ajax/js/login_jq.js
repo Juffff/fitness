@@ -5,6 +5,14 @@ $(document).ready(function () {
     $("#login-button").bind("click", signIn);
     $("#new-user-button").bind("click", newUserFormShow);
     $("#registration-button").bind("click", register);
+    $("#logout").bind("click",logOut);
+
+    if(localStorage.getItem("token")!=null){
+        mainNavBarShow();
+
+    }else {
+        loginFormShow();
+    }
 });
 
 //document objects
@@ -23,6 +31,7 @@ var objects = {
     mainNavBar: $("#main_navbar")
 };
 
+//TODO:remove this)
 objects.mail.val("juff@ukr.net");
 objects.pass.val("Lammer48");
 
@@ -70,6 +79,7 @@ function register() {
 //sing in function
 function signIn() {
 
+
     //json object request
     var login_data = {
         "email": objects.mail.val(),
@@ -92,6 +102,9 @@ function signIn() {
         if (response.error == null) {
             var token = response.token;
             localStorage.setItem("token", token);
+            mainNavBarShow();
+            hideForms();
+
         } else {
             parseObj(response[error]);
             //TODO: error handler
@@ -101,8 +114,17 @@ function signIn() {
 
 }
 
-
+function logOut(){
+    localStorage.removeItem("token");
+    mainNavBarHide();
+    loginFormShow();
+}
 //////////////////////////////UTILS/////////////////////////////////
+
+function hideForms(){
+    objects.formSignUp.hide();
+    objects.formSignIn.hide();
+}
 
 function loginFormShow() {
     //change form
@@ -119,6 +141,15 @@ function newUserFormShow() {
     //visibility correction =)
     objects.newPasswordEq.css("margin-top", "-11px");
 }
+
+function mainNavBarShow(){
+        objects.mainNavBar.show();
+}
+
+function mainNavBarHide(){
+    objects.mainNavBar.hide();
+}
+
 //Simple parsing
 
 function parseObj(object) {
