@@ -8,7 +8,8 @@ $(document).ready(function () {
     $("#logout").bind("click", logOut);
     $("#change_password").bind("click", changePasswordFormShow);
     $("#change-password-button").bind("click", changePassword);
-    $("#cancel-button").bind("click", cancelRegistration);
+    $("#cancel-registration-button").bind("click", cancelRegistration);
+    $("#cancel-change-password-button").bind("click", changePasswordFormHide);
 
 
     if (localStorage.getItem("token") != null) {
@@ -155,7 +156,7 @@ function logOut() {
 function changePassword() {
 
     changePasswordFormShow();
-    objects.formChangePassword.css("padding-top","80px");
+
 
     var pass1 = objects.newUserPasswordChange.val();
     var pass2 = objects.newUserPasswordEqChange.val();
@@ -240,6 +241,7 @@ function mainNavBarHide() {
 function changePasswordFormShow() {
 
     objects.formChangePassword.show();
+    objects.formChangePassword.css("margin", "70px auto");
 }
 
 function changePasswordFormHide() {

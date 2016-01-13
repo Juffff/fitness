@@ -14,6 +14,7 @@
 
     <!-- Підібрані стилі саме для цього шаблона -->
     <link href="css/login.css" rel="stylesheet">
+    <link href="css/panels.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
@@ -24,7 +25,8 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" id="main_navbar" role="navigation" style="display: none">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -52,17 +54,42 @@
 
 <div class="container">
 
-     <form class="form-signin" role="form" id="form-signin" style="display: none">
+
+
+
+<br><br>
+    <div class="ex-field">
+
+        <div class="ex-panel">
+            <div class="ex-panel-heading">Panel with panel-primary class</div>
+            <div class="ex-panel-body">Panel Content</div>
+        </div>
+
+        <div class="ex-panel">
+            <div class="ex-panel-heading">Panel with panel-primary class</div>
+            <div class="ex-panel-body">Panel Content</div>
+        </div>
+
+        <div class="ex-panel">
+            <div class="ex-panel-heading">Panel with panel-primary class</div>
+            <div class="ex-panel-body">Panel Content</div>
+        </div>
+
+
+    </div>
+
+
+    <form class="form-signin" role="form" id="form-signin" style="display: none">
         <!--<h2 class="form-signin-heading">Вхід</h2>-->
         <label for="inputEmail" class="sr-only">Імейл</label>
         <input type="email" id="inputEmail" class="form-control" placeholder="Імейл" required autofocus>
         <label for="inputPassword" class="sr-only">Пароль</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Пароль" required>
-       <!-- <div class="checkbox">
-            <label>
-                <input type="checkbox" value="remember-me"> Запам'ятати мене
-            </label>
-        </div>-->
+        <!-- <div class="checkbox">
+             <label>
+                 <input type="checkbox" value="remember-me"> Запам'ятати мене
+             </label>
+         </div>-->
         <button class="btn btn-lg btn-primary btn-block" type="button" id="login-button">Увійти</button>
         <button class="btn btn-lg btn-primary btn-block" type="button" id="new-user-button">Новий користувач</button>
     </form>
@@ -75,8 +102,9 @@
         <input type="password" id="newUserPassword" class="form-control" placeholder="Пароль" required>
         <label for="newUserPasswordEq" class="sr-only">Пароль ще разок</label>
         <input type="password" id="newUserPasswordEq" class="form-control" placeholder="Пароль ще разок" required>
+
         <button class="btn btn-lg btn-primary btn-block" type="button" id="registration-button">Зареєструвати</button>
-        <button class="btn btn-lg btn-primary btn-block" type="button" id="cancel-button">Відміна</button>
+        <button class="btn btn-lg btn-primary btn-block" type="button" id="cancel-registration-button">Відміна</button>
 
     </form>
 
@@ -85,13 +113,17 @@
         <label for="newUserPassword_change" class="sr-only">Новий пароль</label>
         <input type="password" id="newUserPassword_change" class="form-control" placeholder="Новий пароль" required>
         <label for="newUserPasswordEq_change" class="sr-only">Пароль ще разок</label>
-        <input type="password" id="newUserPasswordEq_change" class="form-control" placeholder="Пароль ще разок" required>
-        <button class="btn btn-lg btn-primary btn-block" type="button" id="change-password-button">Змінити пароль</button>
+        <input type="password" id="newUserPasswordEq_change" class="form-control" placeholder="Пароль ще разок"
+               required>
+        <button class="btn btn-lg btn-primary btn-block" type="button" id="change-password-button">Змінити пароль
+        </button>
+        <button class="btn btn-lg btn-primary btn-block" type="button" id="cancel-change-password-button">Відміна
+        </button>
     </form>
 
     <br><br>
 
-<!--    <div id="reply"></div>-->
+    <!--    <div id="reply"></div>-->
 
 </div> <!-- /container -->
 
